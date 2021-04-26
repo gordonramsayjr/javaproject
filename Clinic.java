@@ -113,9 +113,10 @@ public class Clinic
       if (doctor1 != null && doctor1.getName() == removal){
         doctor1.removeDoc();
         System.out.println("asdasdasdasd");
-        if (doctor2 != null && doctor2.getName() == removal){
-        doctor2 = null;
       }
+      if (doctor2 != null && doctor2.getName() == removal){
+        doctor2 = null;
+      
       }
       else System.out.println("There are no doctors to remove");
 
@@ -127,10 +128,11 @@ public class Clinic
     System.out.println("List of Doctors: ");
     if (doctor1 != null){
       System.out.println(doctor1.getName() + " " + doctor1.getSpecial());
-      if (doctor2 != null){
-        System.out.println(doctor2.getName() + " " + doctor2.getSpecial());
     }
+    if (doctor2 != null){
+      System.out.println(doctor2.getName() + " " + doctor2.getSpecial());
     }
+    
     else System.out.println("No doctors."); 
   }
   public void listPets(){
