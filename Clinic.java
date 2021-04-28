@@ -4,11 +4,8 @@
 // TO DO LIST //
 //  Assignging pets to doctors and vise versa 
 //  Documenting code
-//  Analyse pet method
-//  Decide whether to switch output style (TIO or GUI)
 //  Format code to be neater
 //  Once doctors can be assigned add to listPets() info
-//  Change the remove pets to include if pet1 != null before comparing to the remove variable
 // TO DO LIST //
 
 
@@ -26,7 +23,7 @@ public class Clinic
   
       do{
           System.out.println("Please select an option: ");
-          System.out.println("(1) Add New Doctor (2) Remove Doctor (3) Add New Pet (4) Remove Pet (5) List Doctors (6) List Pets (9) Exit Menu");
+          System.out.println("(1) Add New Doctor (2) Remove Doctor (3) Add New Pet (4) Remove Pet (5) List Doctors (6) List Pets (8) Analyse Pet (9) Exit Menu");
           option = console.nextInt();
           switch(option){
           case 1: 
@@ -47,7 +44,8 @@ public class Clinic
           case 6:
             listPets();
             break;
-             
+          case 8:
+            analysePet();
             }
         }
       while(option!=9);
@@ -263,19 +261,225 @@ public class Clinic
     String removal;
     System.out.println("Please enter the name of the pet you would like to remove: ");
     removal = console.nextLine();
-        if (pet1.getName().equals(removal) ){
+    
+    if (pet1 != null){
+      if (pet1.getName().equals(removal) ){
             pet1 = null;
         }
-        if (pet2.getName().equals(removal) ){
+    }
+    if (pet2 != null){
+      if (pet2.getName().equals(removal) ){
             pet2 = null;
         }
-        if (pet3.getName().equals(removal) ){
+    }   
+    if(pet3 != null){
+      if (pet3.getName().equals(removal) ){
             pet3 = null;
         }
-        if (pet4.getName().equals(removal) ){
+    }
+    if(pet4 != null){
+      if (pet4.getName().equals(removal) ){
             pet4 = null;
         }
-        else if(pet1 == null && pet2 == null && pet3 == null && pet4 == null) System.out.println("There are no pets to remove");
+    }
+    else if(pet1 == null && pet2 == null && pet3 == null && pet4 == null) System.out.println("There are no pets to remove");
 
+  }
+  
+  public void analysePet(){
+    Scanner console = new Scanner(System.in);
+    String name;
+    int option=0;
+
+    System.out.println("Which pet would you like to analyse?");
+    name = console.nextLine(); name = name.toLowerCase();
+
+    if (pet1 != null){
+      if (name.equals(pet1.getName())){
+        option = 0;
+        if(pet1.getType().equals("cat")){
+          if(pet1.getSize().equals("small")){
+            if (pet1.getWeight() > 4){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+          if(pet1.getSize().equals("medium")){
+            if (pet1.getWeight() > 6){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+          if(pet1.getSize().equals("large")){
+            if (pet1.getWeight() > 8){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+        }
+        if(pet1.getType().equals("dog")){
+          if(pet1.getSize().equals("small")){
+            if (pet1.getWeight() > 6){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+          if(pet1.getSize().equals("medium")){
+            if (pet1.getWeight() > 9){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+          if(pet1.getSize().equals("large")){
+            if (pet1.getWeight() > 12){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+        }
+      }
+      else option = 1;
+    }
+    if (pet2 != null){
+      if (name.equals(pet2.getName())){
+        option = 0;
+        if(pet2.getType().equals("cat")){
+          if(pet2.getSize().equals("small")){
+            if (pet2.getWeight() > 4){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+          if(pet2.getSize().equals("medium")){
+            if (pet2.getWeight() > 6){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+          if(pet2.getSize().equals("large")){
+            if (pet2.getWeight() > 8){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+        }
+        if(pet2.getType().equals("dog")){
+          if(pet2.getSize().equals("small")){
+            if (pet2.getWeight() > 6){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+          if(pet2.getSize().equals("medium")){
+            if (pet2.getWeight() > 9){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+          if(pet2.getSize().equals("large")){
+            if (pet2.getWeight() > 12){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+        }  
+      }
+      else option = 1;
+    }
+
+    if (pet3 != null){
+      if (name.equals(pet3.getName())){
+        option = 0;
+        if(pet3.getType().equals("cat")){
+          if(pet3.getSize().equals("small")){
+            if (pet3.getWeight() > 4){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+          if(pet3.getSize().equals("medium")){
+            if (pet3.getWeight() > 6){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+          if(pet3.getSize().equals("large")){
+            if (pet3.getWeight() > 8){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+        }
+        if(pet3.getType().equals("dog")){
+          if(pet3.getSize().equals("small")){
+            if (pet3.getWeight() > 6){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+          if(pet3.getSize().equals("medium")){
+            if (pet3.getWeight() > 9){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+          if(pet3.getSize().equals("large")){
+            if (pet3.getWeight() > 12){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+        } 
+      }
+      else option = 1;
+    }
+    if (pet4 != null){
+      if (name.equals(pet4.getName())){
+        option = 0;
+        if(pet4.getType().equals("cat")){
+          if(pet4.getSize().equals("small")){
+            if (pet4.getWeight() > 4){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+          if(pet4.getSize().equals("medium")){
+            if (pet4.getWeight() > 6){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+          if(pet4.getSize().equals("large")){
+            if (pet4.getWeight() > 8){
+              System.out.println("This cat is overweight");
+            }
+            else System.out.println("This cat is not overweight");
+          }
+        }
+        if(pet4.getType().equals("dog")){
+          if(pet4.getSize().equals("small")){
+            if (pet4.getWeight() > 6){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+          if(pet4.getSize().equals("medium")){
+            if (pet4.getWeight() > 9){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+          if(pet4.getSize().equals("large")){
+            if (pet4.getWeight() > 12){
+              System.out.println("This dog is overweight");
+            }
+            else System.out.println("This dog is not overweight");
+          }
+        }
+       
+      }
+      else option = 1;
+    }
+    if (option == 1) System.out.println("Pet does not exist");
   }
 }
