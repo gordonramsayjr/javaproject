@@ -1,3 +1,17 @@
+// Zackary Jeans and Blake Eveleigh Java Project 1 //
+
+
+// TO DO LIST //
+//  Assignging pets to doctors and vise versa 
+//  Documenting code
+//  Analyse pet method
+//  Decide whether to switch output style (TIO or GUI)
+//  Format code to be neater
+//  Once doctors can be assigned add to listPets() info
+//  Change the remove pets to include if pet1 != null before comparing to the remove variable
+// TO DO LIST //
+
+
 import java.util.*;
 
 public class Clinic 
@@ -24,6 +38,9 @@ public class Clinic
           case 3:
             addPet();
             break;
+          case 4:
+            removePets();
+            break;
           case 5:
             listDoctors();
             break;
@@ -40,6 +57,8 @@ public class Clinic
         Clinic clinic = new Clinic();
         clinic.run();
   }
+
+
   public void addDoctor(){
       String specialisation,name;
       Doctor doctor = new Doctor();
@@ -47,16 +66,34 @@ public class Clinic
 
       if(doctor1==null || doctor2==null){
 
-         doctor = new Doctor();
-
          System.out.println("Enter Doctor's Name: ");
-         name = console.nextLine();
-         name = name.toLowerCase();
-         doctor.setName(name);
+         name = console.nextLine(); name = name.toLowerCase();
 
+         if (doctor1 != null){
+           if (name.equals(doctor1.getName()) ){
+              System.out.println("A doctor with this name arleady exists");
+              run();
+            }    
+         }
+         if (doctor2 != null){
+            if(name.equals(doctor2.getName())){
+            System.out.println("A doctor with this name arleady exists");
+            run();
+          }
+         }
+         doctor = new Doctor();
+         doctor.setName(name);
+         
          System.out.println("Enter Doctor's Specialisation (Dog Or Cat): ");
          specialisation = console.nextLine(); specialisation = specialisation.toLowerCase();
-         doctor.setSpecial(specialisation);
+
+         if (specialisation.equals("dog") || specialisation.equals("cat")){
+           doctor.setSpecial(specialisation);
+         }
+         else {
+          System.out.println("The specialisation must be a dog or cat.");
+          run();
+         }
 
          if (doctor1==null) doctor1=doctor;
          else doctor2=doctor;
@@ -74,27 +111,77 @@ public class Clinic
 
       if (pet1 == null || pet2 == null || pet3 == null || pet4 == null)
       {
-        pet = new Pet();
-
         System.out.println("Please enter pet's name");
         name = console.nextLine(); name = name.toLowerCase();
+        if (pet1 != null){
+          if (name.equals(pet1.getName())){
+            System.out.println("A pet with this name already exists.");
+            run();
+          }
+        }
+        if (pet2 != null){
+          if (name.equals(pet2.getName())){
+            
+            run();
+          }
+        }
+        if (pet3 != null){
+          if (name.equals(pet3.getName())){
+            System.out.println("A pet with this name already exists.");
+            run();
+          }
+          
+        }
+        if (pet4 != null){
+          if (name.equals(pet4.getName())){
+            
+            run();
+          }
+          
+        } 
+        pet = new Pet();
         pet.setName(name); 
 
         System.out.println("Please enter pet's type (Cat or Dog)");
         type = console.nextLine(); type = type.toLowerCase();
-        pet.setType(type);
+        if (type.equals("cat") || type.equals("dog")){
+           pet.setType(type);
+        }
+        else {
+          System.out.println("The pet's type must be cat or dog");
+          run();
+        }
 
         System.out.println("Please enter pet's size (Small, Medium or Large): ");
         size = console.nextLine(); size = size.toLowerCase();
-        pet.setSize(size);
+        if (size.equals("small") || size.equals("medium") || size.equals("large")){
+          pet.setSize(size);
+        }
+        else{
+          System.out.println("The pet must be small, medium or large.");
+          run();
+        } 
 
         System.out.println("Please enter pet's weight (kgs): ");
         weight = console.nextDouble();
-        pet.setWeight(weight);
+        if (weight > 0){
+         pet.setWeight(weight); 
+        }
+        else{
+          System.out.println("The weight must be a positive number");
+          run();
+        } 
+        
 
         System.out.println("Please enter pet's age: ");
         age = console.nextInt();
-        pet.setAge(age);
+        if (age > 0){
+          pet.setAge(age);
+        }
+        else {
+          System.out.println("The age must be a positive number"); 
+          run();
+        }
 
         if (pet1 == null) pet1 = pet;
         else if (pet2 == null) pet2 = pet;
@@ -110,33 +197,85 @@ public class Clinic
       System.out.println("Please enter the name of the doctor you would like to remove: ");
       removal = console.nextLine();
 
-      if (doctor1 != null && doctor1.getName() == removal){
-        doctor1.removeDoc();
-        System.out.println("asdasdasdasd");
+      if (doctor1 != null){
+        if (doctor1.getName().equals(removal)){
+            doctor1 = null;
+        }
       }
-      if (doctor2 != null && doctor2.getName() == removal){
+      if(doctor2 != null){
+        if (doctor2.getName().equals(removal)){
         doctor2 = null;
-      
+        }
       }
-      else System.out.println("There are no doctors to remove");
+  
+      else if (doctor1 == null && doctor2 == null){
+        System.out.println("No doctors to remove");
+      }
 
       }
   
-
   public void listDoctors(){
     Scanner console = new Scanner(System.in);
     System.out.println("List of Doctors: ");
     if (doctor1 != null){
-      System.out.println(doctor1.getName() + " " + doctor1.getSpecial());
+      System.out.println(doctor1.getName() + ": " + doctor1.getSpecial() + " specialist.");
     }
     if (doctor2 != null){
-      System.out.println(doctor2.getName() + " " + doctor2.getSpecial());
+      System.out.println(doctor2.getName() + ": " + doctor2.getSpecial()+ " specialist.");
     }
     
-    else System.out.println("No doctors."); 
+    else if (doctor2 == null && doctor1 == null){
+      System.out.println("There are no doctors.");
+    }
+
   }
   public void listPets(){
     Scanner console = new Scanner(System.in);
+
+    if (pet1 != null){
+      System.out.println("Pet " + pet1.getName() + ": " + pet1.getSize() + " " + pet1.getType() + " weighing " + pet1.getWeight() + " in kgs, at " + pet1.getAge());
+    }
+    if (pet2 != null){
+      System.out.println("Pet " + pet2.getName() + ": " + pet2.getSize() + " " + pet2.getType() + " weighing " + pet2.getWeight() + " in kgs, at " + pet2.getAge());
+    }
+    if (pet3 != null){
+      System.out.println("Pet " + pet3.getName() + ": " + pet3.getSize() + " " + pet3.getType() + " weighing " + pet3.getWeight() + " in kgs, at " + pet3.getAge());
+    }
+    if (pet4 != null){
+      System.out.println("Pet " + pet4.getName() + ": " + pet4.getSize() + " " + pet4.getType() + " weighing " + pet4.getWeight() + " in kgs, at " + pet4.getAge());
+    }
+    else if (pet1 == null && pet2 == null && pet3 == null && pet4 == null){
+      System.out.println("There are no pets.");
+    }
+
+  }
+  public void assignDoctor(){
+    Scanner console = new Scanner(System.in);
+    String s1, s2;
+    System.out.println("Please select a pet: ");
+    s1 = console.nextLine();
+    System.out.println("Please select a doctor to assign to this pet: ");
+    s2 = console.nextLine();
+
+  }
+  public void removePets(){
+    Scanner console = new Scanner(System.in);
+    String removal;
+    System.out.println("Please enter the name of the pet you would like to remove: ");
+    removal = console.nextLine();
+        if (pet1.getName().equals(removal) ){
+            pet1 = null;
+        }
+        if (pet2.getName().equals(removal) ){
+            pet2 = null;
+        }
+        if (pet3.getName().equals(removal) ){
+            pet3 = null;
+        }
+        if (pet4.getName().equals(removal) ){
+            pet4 = null;
+        }
+        else if(pet1 == null && pet2 == null && pet3 == null && pet4 == null) System.out.println("There are no pets to remove");
 
   }
 }
