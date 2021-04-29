@@ -23,7 +23,7 @@ public class Clinic
   
       do{
           System.out.println("Please select an option: ");
-          System.out.println("(1) Add New Doctor (2) Remove Doctor (3) Add New Pet (4) Remove Pet (5) List Doctors (6) List Pets (8) Analyse Pet (9) Exit Menu");
+          System.out.println("(1) Add New Doctor (2) Remove Doctor (3) Add New Pet (4) Remove Pet (5) List Doctors (6) List Pets (7) Assign Pet to Doctor (8) Analyse Pet (9) Exit Menu");
           option = console.nextInt();
           switch(option){
           case 1: 
@@ -44,11 +44,15 @@ public class Clinic
           case 6:
             listPets();
             break;
+          case 7:
+            assignDoctor();
+            break;
           case 8:
             analysePet();
+            break;            
             }
         }
-      while(option!=9);
+      while(option!=0);
   }
   public static void main(String[] args)
   {
@@ -231,16 +235,16 @@ public class Clinic
     Scanner console = new Scanner(System.in);
 
     if (pet1 != null){
-      System.out.println("Pet " + pet1.getName() + ": " + pet1.getSize() + " " + pet1.getType() + " weighing " + pet1.getWeight() + " in kgs, at " + pet1.getAge());
+      System.out.println("Pet " + pet1.getName() + ": " + pet1.getSize() + " " + pet1.getType() + " weighing " + pet1.getWeight() + " in kgs, at " + pet1.getAge() + ". Doctor: " + pet1.getDoctor());
     }
     if (pet2 != null){
-      System.out.println("Pet " + pet2.getName() + ": " + pet2.getSize() + " " + pet2.getType() + " weighing " + pet2.getWeight() + " in kgs, at " + pet2.getAge());
+      System.out.println("Pet " + pet2.getName() + ": " + pet2.getSize() + " " + pet2.getType() + " weighing " + pet2.getWeight() + " in kgs, at " + pet2.getAge()+ ". Doctor: " + pet2.getDoctor());
     }
     if (pet3 != null){
-      System.out.println("Pet " + pet3.getName() + ": " + pet3.getSize() + " " + pet3.getType() + " weighing " + pet3.getWeight() + " in kgs, at " + pet3.getAge());
+      System.out.println("Pet " + pet3.getName() + ": " + pet3.getSize() + " " + pet3.getType() + " weighing " + pet3.getWeight() + " in kgs, at " + pet3.getAge()+ ". Doctor: " + pet3.getDoctor());
     }
     if (pet4 != null){
-      System.out.println("Pet " + pet4.getName() + ": " + pet4.getSize() + " " + pet4.getType() + " weighing " + pet4.getWeight() + " in kgs, at " + pet4.getAge());
+      System.out.println("Pet " + pet4.getName() + ": " + pet4.getSize() + " " + pet4.getType() + " weighing " + pet4.getWeight() + " in kgs, at " + pet4.getAge()+ ". Doctor: " + pet4.getDoctor());
     }
     else if (pet1 == null && pet2 == null && pet3 == null && pet4 == null){
       System.out.println("There are no pets.");
@@ -249,11 +253,339 @@ public class Clinic
   }
   public void assignDoctor(){
     Scanner console = new Scanner(System.in);
-    String s1, s2;
-    System.out.println("Please select a pet: ");
-    s1 = console.nextLine();
-    System.out.println("Please select a doctor to assign to this pet: ");
-    s2 = console.nextLine();
+    String doctor, pet;
+    int swap, option=0, option1=0;
+
+    System.out.println("Name of pet you would like to assign a doctor to: ");
+    pet = console.nextLine();
+
+    if (pet1 != null){
+      if (pet1.getName().equals(pet)){
+        option1 = 1;
+        System.out.println("What doctor would you like to assign to this pet?");
+        doctor = console.nextLine();
+        
+        if (doctor1 != null){
+          if(doctor1.getName().equals(doctor)){
+            option = 1;
+            if(doctor1.getName().equals(pet1.getDoctor())){
+              System.out.println("Doctor already assigned");
+              run();
+            }
+            if (doctor1.getSpecial().equals(pet1.getType())){
+              if (pet1.getDoctor() == null){
+                pet1.setDoctor(doctor);
+                System.out.println("Doctor assigned");
+                run();
+              }
+              else if (doctor2 != null){
+                if (doctor2.getName().equals(pet1.getDoctor())){
+                  System.out.println("A doctor is already assigned to this pet would you like to change that?");
+                  System.out.println("1. Yes 2. No");
+                  swap = console.nextInt();
+                  if (swap == 1){
+                    pet1.setDoctor(doctor);
+                    System.out.println("Doctor assigned");
+                    run();
+                  }
+                  else if (swap == 2){
+                    run();
+                  }
+                }
+              }
+            }
+            else{
+              System.out.println("Doctor does not have the required specialisation");
+              run();
+            }
+          }
+        }
+        if (doctor2 != null){
+          if(doctor2.getName().equals(doctor)){
+            option = 1;
+            if(doctor2.getName().equals(pet1.getDoctor())){
+              System.out.println("Doctor already assigned");
+              run();
+            }
+            if (doctor2.getSpecial().equals(pet1.getType())){
+              if (pet1.getDoctor() == null){
+                pet1.setDoctor(doctor);
+                System.out.println("Doctor assigned");
+                run();
+              }
+              else if (doctor1 != null){
+                if (doctor1.getName().equals(pet1.getDoctor())){
+                  System.out.println("A doctor is already assigned to this pet would you like to change that?");
+                  System.out.println("1. Yes 2. No");
+                  swap = console.nextInt();
+                  if (swap == 1){
+                    pet1.setDoctor(doctor);
+                    System.out.println("Doctor assigned");
+                    run();
+                  }
+                  else if (swap == 2){
+                    run();
+                  }
+                }
+              }
+            }
+            else{
+              System.out.println("Doctor does not have the required specialisation");
+              run();
+            }
+          }
+        }
+
+
+      }
+    }
+    if (pet2 != null){
+      if (pet2.getName().equals(pet)){
+        option1 = 1;
+        System.out.println("What doctor would you like to assign to this pet?");
+        doctor = console.nextLine();
+        
+        if (doctor1 != null){
+          if(doctor1.getName().equals(doctor)){
+            option = 1;
+            if(doctor1.getName().equals(pet2.getDoctor())){
+              System.out.println("Doctor already assigned");
+              run();
+            }
+            if (doctor1.getSpecial().equals(pet2.getType())){
+              if (pet2.getDoctor() == null){
+                pet2.setDoctor(doctor);
+                System.out.println("Doctor assigned");
+                run();
+              }
+              else if (doctor2 != null){
+                if (doctor2.getName().equals(pet2.getDoctor())){
+                  System.out.println("A doctor is already assigned to this pet would you like to change that?");
+                  System.out.println("1. Yes 2. No");
+                  swap = console.nextInt();
+                  if (swap == 1){
+                    pet2.setDoctor(doctor);
+                    System.out.println("Doctor assigned");
+                    run();
+                  }
+                  else if (swap == 2){
+                    run();
+                  }
+                }
+              }
+            }
+            else{
+              System.out.println("Doctor does not have the required specialisation");
+              run();
+            }
+          }
+        }
+        if (doctor2 != null){
+          if(doctor2.getName().equals(doctor)){
+            option = 1;
+            if(doctor2.getName().equals(pet2.getDoctor())){
+              System.out.println("Doctor already assigned");
+              run();
+            }
+            if (doctor2.getSpecial().equals(pet2.getType())){
+              if (pet2.getDoctor() == null){
+                pet2.setDoctor(doctor);
+                System.out.println("Doctor assigned");
+                run();
+              }
+              else if (doctor1 != null){
+                if (doctor1.getName().equals(pet2.getDoctor())){
+                  System.out.println("A doctor is already assigned to this pet would you like to change that?");
+                  System.out.println("1. Yes 2. No");
+                  swap = console.nextInt();
+                  if (swap == 1){
+                    pet2.setDoctor(doctor);
+                    System.out.println("Doctor assigned");
+                    run();
+                  }
+                  else if (swap == 2){
+                    run();
+                  }
+                }
+              }
+            }
+            else{
+              System.out.println("Doctor does not have the required specialisation");
+              run();
+            }
+          }
+        }
+
+
+      }
+    }
+    if (pet3 != null){
+      option1 = 1;
+      if (pet3.getName().equals(pet)){
+        System.out.println("What doctor would you like to assign to this pet?");
+        doctor = console.nextLine();
+        
+        if (doctor1 != null){
+          if(doctor1.getName().equals(doctor)){
+            option = 1;
+            if(doctor1.getName().equals(pet3.getDoctor())){
+              System.out.println("Doctor already assigned");
+              run();
+            }
+            if (doctor1.getSpecial().equals(pet3.getType())){
+              if (pet3.getDoctor() == null){
+                pet3.setDoctor(doctor);
+                System.out.println("Doctor assigned");
+                run();
+              }
+              else if (doctor2 != null){
+                if (doctor2.getName().equals(pet3.getDoctor())){
+                  System.out.println("A doctor is already assigned to this pet would you like to change that?");
+                  System.out.println("1. Yes 2. No");
+                  swap = console.nextInt();
+                  if (swap == 1){
+                    pet3.setDoctor(doctor);
+                    System.out.println("Doctor assigned");
+                    run();
+                  }
+                  else if (swap == 2){
+                    run();
+                  }
+                }
+              }
+            }
+            else{
+              System.out.println("Doctor does not have the required specialisation");
+              run();
+            }
+          }
+        }
+        if (doctor2 != null){
+          if(doctor2.getName().equals(doctor)){
+            option = 1;
+            if(doctor2.getName().equals(pet3.getDoctor())){
+              System.out.println("Doctor already assigned");
+              run();
+            }
+            if (doctor2.getSpecial().equals(pet3.getType())){
+              if (pet3.getDoctor() == null){
+                pet3.setDoctor(doctor);
+                System.out.println("Doctor assigned");
+                run();
+              }
+              else if (doctor1 != null){
+                if (doctor1.getName().equals(pet3.getDoctor())){
+                  System.out.println("A doctor is already assigned to this pet would you like to change that?");
+                  System.out.println("1. Yes 2. No");
+                  swap = console.nextInt();
+                  if (swap == 1){
+                    pet3.setDoctor(doctor);
+                    System.out.println("Doctor assigned");
+                    run();
+                  }
+                  else if (swap == 2){
+                    run();
+                  }
+                }
+              }
+            }
+            else{
+              System.out.println("Doctor does not have the required specialisation");
+              run();
+            }
+          }
+        }
+
+
+      }
+    }
+    if (pet4 != null){
+      if (pet4.getName().equals(pet)){
+        option1 = 1;
+        System.out.println("What doctor would you like to assign to this pet?");
+        doctor = console.nextLine();
+        
+        if (doctor1 != null){
+          if(doctor1.getName().equals(doctor)){
+            option = 1;
+            if(doctor1.getName().equals(pet4.getDoctor())){
+              System.out.println("Doctor already assigned");
+              run();
+            }
+            if (doctor1.getSpecial().equals(pet4.getType())){
+              if (pet4.getDoctor() == null){
+                pet4.setDoctor(doctor);
+                System.out.println("Doctor assigned");
+                run();
+              }
+              else if (doctor2 != null){
+                if (doctor2.getName().equals(pet4.getDoctor())){
+                  System.out.println("A doctor is already assigned to this pet would you like to change that?");
+                  System.out.println("1. Yes 2. No");
+                  swap = console.nextInt();
+                  if (swap == 1){
+                    pet4.setDoctor(doctor);
+                    System.out.println("Doctor assigned");
+                    run();
+                  }
+                  else if (swap == 2){
+                    run();
+                  }
+                }
+              }
+            }
+            else{
+              System.out.println("Doctor does not have the required specialisation");
+              run();
+            }
+          }
+        }
+        if (doctor2 != null){
+          if(doctor2.getName().equals(doctor)){
+            option = 1;
+            if(doctor2.getName().equals(pet4.getDoctor())){
+              System.out.println("Doctor already assigned");
+              run();
+            }
+            if (doctor2.getSpecial().equals(pet4.getType())){
+              if (pet4.getDoctor() == null){
+                pet4.setDoctor(doctor);
+                System.out.println("Doctor assigned");
+                run();
+              }
+              else if (doctor1 != null){
+                if (doctor1.getName().equals(pet4.getDoctor())){
+                  System.out.println("A doctor is already assigned to this pet would you like to change that?");
+                  System.out.println("1. Yes 2. No");
+                  swap = console.nextInt();
+                  if (swap == 1){
+                    pet4.setDoctor(doctor);
+                    System.out.println("Doctor assigned");
+                    run();
+                  }
+                  else if (swap == 2){
+                    run();
+                  }
+                }
+              }
+            }
+            else{
+              System.out.println("Doctor does not have the required specialisation");
+              run();
+            }
+          }
+        }
+
+
+      }
+    }
+
+    if(option1 == 0){
+      System.out.println("This pet does not exist");
+    }
+    else if(option == 0){
+      System.out.println("This doctor does not exist");
+    }
 
   }
   public void removePets(){
