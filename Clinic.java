@@ -11,6 +11,8 @@
 
 import java.util.*;
 
+import org.graalvm.compiler.asm.aarch64.AArch64Assembler.SystemHint;
+
 public class Clinic 
 {
   private Doctor doctor1, doctor2;
@@ -23,7 +25,7 @@ public class Clinic
   
       do{
           System.out.println("Please select an option: ");
-          System.out.println("(1) Add New Doctor (2) Remove Doctor (3) Add New Pet (4) Remove Pet (5) List Doctors (6) List Pets (7) Assign Pet to Doctor (8) Analyse Pet (9) Exit Menu");
+          System.out.println("(1) Add New Doctor (2) Remove Doctor (3) Add New Pet (4) Remove Pet (5) List Doctors (6) List Pets (7) Assign Pet to Doctor (8) Analyse Pet (9) List Doctor's Pets (0) Exit Menu");
           option = console.nextInt();
           switch(option){
           case 1: 
@@ -49,10 +51,13 @@ public class Clinic
             break;
           case 8:
             analysePet();
-            break;            
+            break;
+          case 9:
+            doctorsPets();
+            break;
             }
         }
-      while(option!=0);
+      while(option!=9);
   }
   public static void main(String[] args)
   {
@@ -196,21 +201,66 @@ public class Clinic
   public void removeDoctor(){
       Scanner console = new Scanner(System.in);
       String removal;
+      int option=0;
       System.out.println("Please enter the name of the doctor you would like to remove: ");
       removal = console.nextLine();
 
       if (doctor1 != null){
         if (doctor1.getName().equals(removal)){
+          option = 1;
+          if (pet1 != null){
+            if (pet1.getDoctor().equals(doctor1.getName())){
+              pet1.setDoctor(null);
+            }
+          }
+          if (pet2 != null){
+            if (pet2.getDoctor().equals(doctor1.getName())){
+              pet2.setDoctor(null);
+            }
+          }
+          if (pet3 != null){
+            if (pet3.getDoctor().equals(doctor1.getName())){
+              pet3.setDoctor(null);
+            }
+          }
+          if (pet4 != null){
+            if (pet4.getDoctor().equals(doctor1.getName())){
+              pet4.setDoctor(null);
+            }
+          }
             doctor1 = null;
+            System.out.println("Doctor " + doctor1.getName() + " removed.");
         }
       }
       if(doctor2 != null){
         if (doctor2.getName().equals(removal)){
+          option = 1;
+          if (pet1 != null){
+            if (pet1.getDoctor().equals(doctor2.getName())){
+              pet1.setDoctor(null);
+            }
+          }
+          if (pet2 != null){
+            if (pet2.getDoctor().equals(doctor2.getName())){
+              pet2.setDoctor(null);
+            }
+          }
+          if (pet3 != null){
+            if (pet3.getDoctor().equals(doctor2.getName())){
+              pet3.setDoctor(null);
+            }
+          }
+          if (pet4 != null){
+            if (pet4.getDoctor().equals(doctor2.getName())){
+              pet4.setDoctor(null);
+            }
+          }
         doctor2 = null;
+        System.out.println("Doctor " + doctor2.getName() + " removed.");
         }
       }
   
-      else if (doctor1 == null && doctor2 == null){
+      if(option == 0){
         System.out.println("No doctors to remove");
       }
 
@@ -813,5 +863,85 @@ public class Clinic
       else option = 1;
     }
     if (option == 1) System.out.println("Pet does not exist");
+  }
+
+  public void doctorsPets(){
+    Scanner console = new Scanner(System.in);
+    String doctor;
+    int option = 0, option1=0;
+
+    System.out.println("Which doctor's pets would you like to view?");
+    doctor = console.nextLine();
+
+    if(doctor1 == null && doctor2 == null){
+      System.out.println("There are no doctors.");
+      run();
+    }
+    if (doctor1 != null){
+      if (doctor1.getName().equals(doctor)){
+        option = 1;
+        System.out.println(doctor1.getName() + "'s Pets:");
+        if (pet1 != null){
+          if (pet1.getDoctor().equals(doctor1.getName())){
+            option1 = 1;
+            System.out.println(pet1.getName());
+          }
+        }
+        if (pet2 != null){
+          if (pet2.getDoctor().equals(doctor1.getName())){
+            option1 = 1;
+            System.out.println(pet2.getName());
+          }
+        }
+        if (pet3 != null){
+          if (pet3.getDoctor().equals(doctor1.getName())){
+            option1 = 1;
+            System.out.println(pet3.getName());
+          }
+        }
+        if (pet4 != null){
+          if (pet4.getDoctor().equals(doctor1.getName())){
+            option1 = 1;
+            System.out.println(pet4.getName());
+          }
+        }
+      }
+    }
+    if (doctor2 != null){
+      if (doctor2.getName().equals(doctor)){
+        option = 1;
+        System.out.println(doctor2.getName() + "'s Pets:");
+        if (pet1 != null){
+          if (pet1.getDoctor().equals(doctor2.getName())){
+            option1 = 1;
+            System.out.println(pet1.getName());
+          }
+        }
+        if (pet2 != null){
+          if (pet2.getDoctor().equals(doctor2.getName())){
+            option1 = 1;
+            System.out.println(pet2.getName());
+          }
+        }
+        if (pet3 != null){
+          if (pet3.getDoctor().equals(doctor2.getName())){
+            option1 = 1;
+            System.out.println(pet3.getName());
+          }
+        }
+        if (pet4 != null){
+          if (pet4.getDoctor().equals(doctor2.getName())){
+            option1 = 1;
+            System.out.println(pet4.getName());
+          }
+        }
+      }
+    }
+    if(option1 == 0){
+      System.out.println("This doctor has no pets assigned to them");
+    }
+    if (option == 0){
+      System.out.println("There are no doctors with that name");
+    }
   }
 }
